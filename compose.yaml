@@ -1,0 +1,11 @@
+services:
+  geodb:
+    image: 'postgis/postgis:15-3.4'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./geodb/persistence:/var/lib/postgresql/data
+  
