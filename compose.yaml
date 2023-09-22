@@ -8,4 +8,9 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./geodb/persistence:/var/lib/postgresql/data
-  
+  api:
+    build: ./api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/usr/src/app
