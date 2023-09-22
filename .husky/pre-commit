@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# API
+npx concurrently "npm:test --prefix api" "npm:format --prefix api" "npm:lint --prefix api"
