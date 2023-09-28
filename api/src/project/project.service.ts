@@ -9,4 +9,15 @@ export class ProjectService {
   async list(): Promise<SelectProject[]> {
     return this.db.select().from(project);
   }
+
+  async create(row: InsertProject): Promise<{ id: string }> {
+    const result = await this.db
+      .insert(project)
+      .values(row)
+      .returning({ id: project.id });
+    const {
+      [0]: { id },
+    } = result;
+    return { id };
+  }
 }

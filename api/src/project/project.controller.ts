@@ -10,4 +10,13 @@ export class ProjectController {
   async getAll() {
     return this.service.list();
   }
+
+  @Post('/')
+  async create(@Body() params: InsertProject) {
+    const result = await this.service.create({
+      name: params.name,
+    });
+
+    return result;
+  }
 }
