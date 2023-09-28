@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1695911732821,
+      "tag": "0000_sturdy_sister_grimm",
+      "breakpoints": true
+    }
+  ]
+}
