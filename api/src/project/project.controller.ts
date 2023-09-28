@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { InsertProject } from 'src/schema/project';
 
@@ -9,6 +9,11 @@ export class ProjectController {
   @Get('/')
   async getAll() {
     return this.service.list();
+  }
+
+  @Get('/:id')
+  async geyById(@Param('id') id: string) {
+    return this.service.getById(id);
   }
 
   @Post('/')
