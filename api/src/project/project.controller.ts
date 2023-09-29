@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { InsertProject } from 'src/schema/project';
 
@@ -8,7 +17,7 @@ export class ProjectController {
 
   @Get('/')
   async getAll() {
-    return this.service.list();
+    return this.service.getAll();
   }
 
   @Get('/:id')
@@ -18,10 +27,25 @@ export class ProjectController {
 
   @Post('/')
   async create(@Body() params: InsertProject) {
-    const result = await this.service.create({
+    return await this.service.create({
       name: params.name,
     });
+  }
 
-    return result;
+  @Patch('/:id')
+  async update(
+    @Param('id') id: string,
+    @Body() params: Partial<InsertProject>,
+  ) {
+    return await this.service.update(id, {
+      name: params.name,
+    });
+  }
+
+  @Delete('/:id')
+  @HttpCode(204)
+  async delete(@Param('id') id: string) {
+    await this.service.delete(id);
+    return null;
   }
 }
