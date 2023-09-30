@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
-import { Point } from 'src/drizzle-pg-geotype';
+import { Polygon } from 'src/drizzle-pgis/types';
 import { DbType, DB } from 'src/global/providers/db.provider';
 import { SelectTaxLot, InsertTaxLot, taxLot } from 'src/schema/tax-lot';
 
@@ -17,7 +17,7 @@ export class TaxLotService {
       .from(taxLot);
     return result.map(({ id, geom }) => ({
       id,
-      geom: JSON.parse(geom) as Point,
+      geom: JSON.parse(geom) as Polygon,
     }));
   }
 
@@ -30,7 +30,7 @@ export class TaxLotService {
       .insert(taxLot)
       .values({
         id: row.id,
-        geom: encodedGeom as unknown as Point,
+        geom: encodedGeom as unknown as Polygon,
       })
       .returning({ id: taxLot.id });
     return result[0];

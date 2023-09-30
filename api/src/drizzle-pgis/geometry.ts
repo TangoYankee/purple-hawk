@@ -1,5 +1,5 @@
 import { customType } from '.';
-import { Point, Polygon } from '.';
+import { Point, Polygon } from './types';
 
 type SimpleFeature = Point | Polygon;
 interface GeometryConfig {

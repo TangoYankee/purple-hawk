@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "708acd2e-5c01-4088-b4ae-1918cc47bcfe",
+  "id": "351a4c3e-a3b2-45fe-b6c3-02b24010de7f",
   "prevId": "431a24bc-4b27-40bd-ae29-79dbf4eb56cb",
   "tables": {
     "project": {
@@ -34,12 +34,12 @@
         "id": {
           "name": "id",
           "type": "char(10)",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true
         },
         "geom": {
           "name": "geom",
-          "type": "geometry(point)",
+          "type": "geometry(polygon)",
           "primaryKey": false,
           "notNull": false
         }
