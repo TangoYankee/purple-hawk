@@ -1,11 +1,10 @@
 import { pgTable, char } from 'drizzle-orm/pg-core';
 import { InferSelectModel, InferInsertModel } from 'drizzle-orm';
-import { geometry } from 'src/drizzle-pgis';
-import { Polygon } from 'src/drizzle-pgis/types';
+import { polygon } from 'src/drizzle-pgis';
 
 export const taxLot = pgTable('tax_lot', {
   id: char('id', { length: 10 }).primaryKey(),
-  geom: geometry<Polygon>('geom', { simpleFeatureLabel: 'polygon' }),
+  geom: polygon('geom', 4326),
 });
 
 export type SelectTaxLot = InferSelectModel<typeof taxLot>;
