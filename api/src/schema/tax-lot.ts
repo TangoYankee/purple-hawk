@@ -8,4 +8,4 @@ export const taxLot = pgTable('tax_lot', {
 });
 
 export type SelectTaxLot = InferSelectModel<typeof taxLot>;
-export type InsertProject = InferInsertModel<typeof taxLot>;
+export type InsertTaxLot = InferInsertModel<typeof taxLot>;

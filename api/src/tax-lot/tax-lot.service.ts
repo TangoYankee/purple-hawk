@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 import { Point } from 'src/drizzle-pg-geotype';
 import { DbType, DB } from 'src/global/providers/db.provider';
-import { SelectTaxLot, taxLot } from 'src/schema/tax-lot';
+import { SelectTaxLot, InsertTaxLot, taxLot } from 'src/schema/tax-lot';
 
 @Injectable()
 export class TaxLotService {
@@ -19,5 +19,20 @@ export class TaxLotService {
       id,
       geom: JSON.parse(geom) as Point,
     }));
+  }
+
+  async create(row: InsertTaxLot): Promise<{ id: string }> {
+    const encodingQuery = await this.db.execute(
+      sql<string>`select ST_GeomFromGeoJSON(${row.geom}) as enconded_geom`,
+    );
+    const encodedGeom = encodingQuery.rows[0].enconded_geom;
+    const result = await this.db
+      .insert(taxLot)
+      .values({
+        id: row.id,
+        geom: encodedGeom as unknown as Point,
+      })
+      .returning({ id: taxLot.id });
+    return result[0];
   }
 }
