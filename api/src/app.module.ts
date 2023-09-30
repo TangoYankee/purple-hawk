@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DbConfig } from './config';
 import { GlobalModule } from './global/global.module';
 import { ProjectModule } from './project/project.module';
+import { TaxLotModule } from './tax-lot/tax-lot.module';
 
 @Global()
 @Module({
@@ -15,6 +16,7 @@ import { ProjectModule } from './project/project.module';
     }),
     GlobalModule,
     ProjectModule,
+    TaxLotModule,
   ],
   controllers: [AppController],
   providers: [AppService],
