@@ -15,6 +15,13 @@
       "when": 1696095452170,
       "tag": "0001_ordinary_chimera",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1696119907566,
+      "tag": "0002_clammy_victor_mancha",
+      "breakpoints": true
     }
   ]
 }
