@@ -14,7 +14,7 @@ import { exit } from 'process';
   });
   await client.connect();
   const db = drizzle(client);
-  await migrate(db, { migrationsFolder: './drizzle/migration' });
+  await migrate(db, { migrationsFolder: './db-management/migration' });
   console.info('end migrate');
   exit();
 })();

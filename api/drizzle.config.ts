@@ -3,7 +3,7 @@ import type { Config } from 'drizzle-kit';
 export default {
   schema: './src/schema/*',
   driver: 'pg',
-  out: 'drizzle/migration',
+  out: 'db-management/migration',
   dbCredentials: {
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
