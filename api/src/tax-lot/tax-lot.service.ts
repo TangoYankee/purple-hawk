@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
 import { Polygon } from 'src/drizzle-pgis/types';
 import { DbType, DB } from 'src/global/providers/db.provider';
+import { projectSiteToTaxLot } from 'src/schema/project-site-tax-lot';
 import { taxLot } from 'src/schema/tax-lot';
 
 @Injectable()
@@ -70,6 +71,9 @@ export class TaxLotService {
   }
 
   async delete(id: string): Promise<void> {
+    await this.db
+      .delete(projectSiteToTaxLot)
+      .where(eq(projectSiteToTaxLot.taxLotId, id));
     await this.db.delete(taxLot).where(eq(taxLot.id, id));
   }
 }

@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { DB, DbType } from 'src/global/providers/db.provider';
 import { InsertProject, project, SelectProject } from 'src/schema/project';
+import { projectSiteToTaxLot } from 'src/schema/project-site-tax-lot';
 
 @Injectable()
 export class ProjectService {
@@ -38,6 +39,15 @@ export class ProjectService {
   }
 
   async delete(id: string): Promise<void> {
+    const siteIdQuery = this.db
+      .select({
+        siteId: project.siteId,
+      })
+      .from(project)
+      .where(eq(project.id, id));
+    await this.db
+      .delete(projectSiteToTaxLot)
+      .where(eq(projectSiteToTaxLot.projectSiteId, siteIdQuery));
     await this.db.delete(project).where(eq(project.id, id));
   }
 }
