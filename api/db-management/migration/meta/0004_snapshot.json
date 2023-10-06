@@ -1,0 +1,185 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "cea91a70-1ea2-4157-959d-f6665b204e07",
+  "prevId": "aadf3edd-ee0e-4330-99d7-0c4407ff4ec1",
+  "tables": {
+    "project_site_tax_lot": {
+      "name": "project_site_tax_lot",
+      "schema": "",
+      "columns": {
+        "project_site_id": {
+          "name": "project_site_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tax_lot_id": {
+          "name": "tax_lot_id",
+          "type": "char(10)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "project_site_tax_lot_project_site_id_project_site_id_fk": {
+          "name": "project_site_tax_lot_project_site_id_project_site_id_fk",
+          "tableFrom": "project_site_tax_lot",
+          "tableTo": "project",
+          "columnsFrom": [
+            "project_site_id"
+          ],
+          "columnsTo": [
+            "site_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "project_site_tax_lot_tax_lot_id_tax_lot_id_fk": {
+          "name": "project_site_tax_lot_tax_lot_id_tax_lot_id_fk",
+          "tableFrom": "project_site_tax_lot",
+          "tableTo": "tax_lot",
+          "columnsFrom": [
+            "tax_lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "project": {
+      "name": "project",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "area_id": {
+          "name": "area_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "project_user_id_user_id_fk": {
+          "name": "project_user_id_user_id_fk",
+          "tableFrom": "project",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "project_site_id_unique": {
+          "name": "project_site_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "site_id"
+          ]
+        },
+        "project_area_id_unique": {
+          "name": "project_area_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "area_id"
+          ]
+        }
+      }
+    },
+    "tax_lot": {
+      "name": "tax_lot",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "char(10)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "wgs84": {
+          "name": "wgs84",
+          "type": "geography(polygon, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "long_island_ft": {
+          "name": "long_island_ft",
+          "type": "geometry(polygon,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
