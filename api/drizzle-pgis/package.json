@@ -2,7 +2,7 @@
   "name": "drizzle-pgis",
   "version": "0.1.0",
   "description": "PostGIS spatial custom types for drizzle-orm",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
