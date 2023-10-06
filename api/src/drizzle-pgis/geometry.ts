@@ -1,6 +1,6 @@
 import { customType } from '.';
 import {
-  GeometryKey,
+  SimpleFeature,
   Geometry,
   Point,
   LineString,
@@ -12,26 +12,25 @@ import {
 } from './types';
 
 export const geometry =
-  <T extends Geometry>(geometryKey: GeometryKey) =>
-  (name: string, srid = 4326) => {
-    return customType<{ data: T }>({
+  <T extends Geometry>(sf: SimpleFeature) =>
+  (name: string, srid = 3857) =>
+    customType<{ data: T }>({
       dataType() {
-        return `geometry(${geometryKey},${srid})`;
+        return `geometry(${sf},${srid})`;
       },
     })(name);
-  };
 
-export const point = geometry<Point>('point');
+export const pointGeom = geometry<Point>('point');
 
-export const multiPoint = geometry<MultiPoint>('point');
+export const multiPointGeom = geometry<MultiPoint>('point');
 
-export const lineString = geometry<LineString>('lineString');
+export const lineStringGeom = geometry<LineString>('lineString');
 
-export const multiLineString = geometry<MultiLineString>('multiLineString');
+export const multiLineStringGeom = geometry<MultiLineString>('multiLineString');
 
-export const polygon = geometry<Polygon>('polygon');
+export const polygonGeom = geometry<Polygon>('polygon');
 
-export const multiPolygon = geometry<MultiPolygon>('multiPolygon');
+export const multiPolygonGeom = geometry<MultiPolygon>('multiPolygon');
 
-export const geometryCollection =
+export const geometryCollectionGeom =
   geometry<GeometryCollection>('geometryCollection');

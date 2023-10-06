@@ -9,8 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { TaxLotService } from './tax-lot.service';
-import { InsertTaxLot } from 'src/schema/tax-lot';
-import { Polygon } from 'geojson';
+import { Polygon } from 'src/drizzle-pgis/types';
 
 @Controller('tax-lot')
 export class TaxLotController {
@@ -27,12 +26,14 @@ export class TaxLotController {
   }
 
   @Post('/')
-  async create(@Body() params: InsertTaxLot): Promise<{ id: string }> {
+  async create(
+    @Body() params: { id: string; wgs84: Polygon },
+  ): Promise<{ id: string }> {
     return await this.service.create(params);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() params: { geom: Polygon }) {
+  async update(@Param('id') id: string, @Body() params: { wgs84: Polygon }) {
     return await this.service.update(id, params);
   }
 

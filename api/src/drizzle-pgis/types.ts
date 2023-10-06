@@ -1,5 +1,5 @@
 export * from 'geojson';
-export type GeometryKey =
+export type SimpleFeature =
   | 'point'
   | 'multiPoint'
   | 'lineString'

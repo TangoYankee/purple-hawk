@@ -2,11 +2,22 @@ export { customType } from 'drizzle-orm/pg-core';
 
 export {
   geometry,
-  point,
-  multiPoint,
-  lineString,
-  multiLineString,
-  polygon,
-  multiPolygon,
-  geometryCollection,
+  pointGeom,
+  multiPointGeom,
+  lineStringGeom,
+  multiLineStringGeom,
+  polygonGeom,
+  multiPolygonGeom,
+  geometryCollectionGeom,
 } from './geometry';
+
+export {
+  geography,
+  pointGeog,
+  multiPointGeog,
+  lineStringGeog,
+  multiLineStringGeog,
+  polygonGeog,
+  multiPolygonGeog,
+  geometryCollectionGeog,
+} from './geography';
