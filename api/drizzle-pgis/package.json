@@ -1,0 +1,29 @@
+{
+  "name": "drizzle-pgis",
+  "version": "0.1.0",
+  "description": "PostGIS spatial custom types for drizzle-orm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TangoYankee/purple-hawk.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "drizzle",
+    "postgis"
+  ],
+  "author": "Timothy Miller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TangoYankee/purple-hawk/issues"
+  },
+  "homepage": "https://github.com/TangoYankee/purple-hawk/tree/main/api/src/drizzle-pgis#readme.md",
+  "dependencies": {
+    "@types/geojson": "^7946.0.11",
+    "drizzle-orm": "^0.28.6"
+  }
+}

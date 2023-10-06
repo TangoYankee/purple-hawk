@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { TaxLotService } from './tax-lot.service';
-import { Polygon } from 'src/drizzle-pgis/types';
+import { Polygon } from '../../drizzle-pgis/types';
 
 @Controller('tax-lot')
 export class TaxLotController {

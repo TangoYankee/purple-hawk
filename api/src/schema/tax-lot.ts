@@ -1,6 +1,6 @@
 import { pgTable, char } from 'drizzle-orm/pg-core';
 import { InferSelectModel, InferInsertModel } from 'drizzle-orm';
-import { polygonGeog, polygonGeom } from 'src/drizzle-pgis';
+import { polygonGeog, polygonGeom } from '../../drizzle-pgis';
 
 export const taxLot = pgTable('tax_lot', {
   id: char('id', { length: 10 }).primaryKey(),
