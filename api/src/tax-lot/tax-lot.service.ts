@@ -19,7 +19,7 @@ export class TaxLotService {
     return result;
   }
 
-  async getById(id: string): Promise<{ id: string; }> {
+  async getById(id: string): Promise<{ id: string }> {
     const result = await this.db
       .select({
         id: taxLot.id,
