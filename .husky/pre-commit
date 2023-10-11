@@ -3,3 +3,13 @@
 
 # API
 npx concurrently "npm:test --prefix api" "npm:format --prefix api" "npm:lint --prefix api"
+
+# ETL
+# if [ -d etl/venv ] 
+# then
+#     source etl/venv/bin/activate
+#     black etl/*.ipynb
+#     deactivate
+# else
+#     echo "ETL venv not found. Skipping formatting."
+# fi
