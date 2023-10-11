@@ -16,5 +16,6 @@ import { exit } from 'process';
   const db = drizzle(client);
   await migrate(db, { migrationsFolder: './db-management/migration' });
   console.info('end migrate');
+  await pgClient.end();
   exit();
 })();
