@@ -9,7 +9,7 @@ In contrast, PostGIS uses Geometry to refer specifically to coordinates that mod
 ## Guidelines for using the types
 Within PostGIS, projected coordinate systems typically should be stored in Geometry columns. Conversely, geodetic coordinate systems should be stored in Geography columns.
 
-Following this guidance, WGS84 (EPSG:4236) should be stored in a Geography column.
+Following this guidance, WGS84 (EPSG:4326) should be stored in a Geography column.
 Its projected counterpart, Pseudo-Mercator (EPSG:3857), should be stored in a Geometry Column. This package encourages this convention by setting the default srid for geomtry types to 3857 and geography types to 4326.
 
 ## WGS84 is special
