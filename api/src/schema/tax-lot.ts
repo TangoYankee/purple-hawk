@@ -4,8 +4,8 @@ import { borough } from './borough';
 
 export const taxLot = pgTable('tax_lot', {
   id: text('id').primaryKey(),
-  bbl: text('bbl'),
-  boroughCode: char('boroughCode', { length: 1 }).references(() => borough.id),
+  bbl: text('bbl').unique().notNull(),
+  boroughCode: char('borough_code', { length: 1 }).references(() => borough.id),
   block: text('block'),
   lot: text('lot'),
 });

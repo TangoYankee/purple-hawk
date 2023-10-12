@@ -10,8 +10,14 @@
 
 ## Making files available in docker
 ```
-sudo cp ../purple-hawk-data/borough.csv api/db_volume/
-sudo cp ../purple-hawk-data/pluto_23v2_essentials_strict_short.csv api/db_volume/
-sudo cp ../purple-hawk-data/pluto_23v2_2263_short.csv api/db_volume/
-sudo cp ../purple-hawk-data/pluto_23v2_4326_short.csv api/db_volume/
+sudo cp ../purple-hawk-data/[filename].csv api/db_volume/
 ```
+
+CSV Files:
+ - borough
+ - pluto_23v2_essentials_short_v2
+ - pluto_23v2_2263_short
+ - pluto_23v2_4326_short
+ - building_essentials_short_v1
+ - building_long_island_short_v1
+ - building_wgs84_short_v1

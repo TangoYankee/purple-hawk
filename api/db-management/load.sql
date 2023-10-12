@@ -6,8 +6,8 @@ COPY borough ("id", "name", "abbr")
     CSV HEADER;
 
 -- Tax lot field data
-COPY tax_lot ("id", "bbl", "boroughCode", "block", "lot")
-    FROM 'pluto_23v2_essentials_strict_short.csv'
+COPY tax_lot ("id", "bbl", "borough_code", "block", "lot")
+    FROM 'pluto_23v2_essentials_short_v2.csv'
     DELIMITER ','
     CSV HEADER;
 
@@ -23,5 +23,25 @@ COPY tax_lot_long_island ("tax_lot_id", "geom")
     DELIMITER ','
     CSV HEADER;
 	
+ROLLBACK;
+COMMIT;
+
+BEGIN;
+
+COPY building ("id_number", "construction_year", "roof_height", "ground_elevation", "feat_code")
+	FROM 'building_essentials_short_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+
+COPY building_long_island("bin", "geom")
+	FROM 'building_long_island_short_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+
+COPY building_wgs84("bin", "geog")
+	FROM 'building_wgs84_short_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+
 ROLLBACK;
 COMMIT;
