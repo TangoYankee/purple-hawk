@@ -10,8 +10,8 @@ export class TaxLotController {
     return this.service.getAll();
   }
 
-  @Get('/:id')
-  async getById(@Param('id') id: string) {
-    return this.service.getById(id);
+  @Get('/:bbl')
+  async getById(@Param('bbl') bbl: string) {
+    return this.service.getById(bbl);
   }
 }

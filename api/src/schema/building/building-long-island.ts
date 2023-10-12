@@ -5,6 +5,6 @@ import { multiPolygonGeom } from 'drizzle-pgis';
 export const buildingLongIsland = pgTable('building_long_island', {
   bin: char('bin', { length: 7 })
     .notNull()
-    .references(() => building.id_number),
+    .references(() => building.idNumber),
   geom: multiPolygonGeom('geom', 2263),
 });

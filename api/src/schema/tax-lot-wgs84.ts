@@ -1,10 +1,10 @@
-import { pgTable, text } from 'drizzle-orm/pg-core';
+import { pgTable, char } from 'drizzle-orm/pg-core';
 import { taxLot } from './tax-lot';
 import { multiPolygonGeog } from '../../drizzle-pgis';
 
 export const taxLotWGS84 = pgTable('tax_lot_wgs84', {
-  tax_lot_id: text('tax_lot_id')
+  taxLotBBL: char('tax_lot_bbl', { length: 10 })
     .notNull()
-    .references(() => taxLot.id),
+    .references(() => taxLot.bbl),
   geog: multiPolygonGeog('geog', 4326),
 });

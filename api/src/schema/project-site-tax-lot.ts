@@ -1,4 +1,4 @@
-import { pgTable, text, integer } from 'drizzle-orm/pg-core';
+import { pgTable, char, integer } from 'drizzle-orm/pg-core';
 import { project } from './project';
 import { taxLot } from './tax-lot';
 
@@ -6,7 +6,7 @@ export const projectSiteToTaxLot = pgTable('project_site_tax_lot', {
   projectSiteId: integer('project_site_id')
     .notNull()
     .references(() => project.siteId),
-  taxLotId: text('tax_lot_id')
+  taxLotBBL: char('tax_lot_bbl', { length: 10 })
     .notNull()
-    .references(() => taxLot.id),
+    .references(() => taxLot.bbl),
 });

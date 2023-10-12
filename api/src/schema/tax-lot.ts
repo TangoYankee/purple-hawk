@@ -3,8 +3,7 @@ import { InferSelectModel, InferInsertModel } from 'drizzle-orm';
 import { borough } from './borough';
 
 export const taxLot = pgTable('tax_lot', {
-  id: text('id').primaryKey(),
-  bbl: text('bbl').unique().notNull(),
+  bbl: char('bbl', { length: 10 }).primaryKey(),
   boroughCode: char('borough_code', { length: 1 }).references(() => borough.id),
   block: text('block'),
   lot: text('lot'),
