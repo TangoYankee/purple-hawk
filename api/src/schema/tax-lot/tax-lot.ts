@@ -1,6 +1,6 @@
 import { pgTable, char, text } from 'drizzle-orm/pg-core';
 import { InferSelectModel, InferInsertModel } from 'drizzle-orm';
-import { borough } from './borough';
+import { borough } from '../borough';
 
 export const taxLot = pgTable('tax_lot', {
   bbl: char('bbl', { length: 10 }).primaryKey(),
