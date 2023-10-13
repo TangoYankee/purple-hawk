@@ -50,3 +50,23 @@ COPY building_wgs84("bin", "geog")
 
 ROLLBACK;
 COMMIT;
+
+BEGIN;
+-- Zoning District
+COPY zoning_district("id", "code")
+    FROM 'zoning_district_fields_v1.csv'
+    DELIMITER ','
+    CSV HEADER;
+
+COPY zoning_district_long_island("id", "geom")
+	FROM 'zoning_district_long_island_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+	
+COPY zoning_district_wgs84("id", "geog")
+	FROM 'zoning_district_wgs84_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+
+ROLLBACK;
+COMMIT;
