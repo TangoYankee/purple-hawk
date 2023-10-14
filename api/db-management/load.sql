@@ -70,3 +70,13 @@ COPY zoning_district_wgs84("id", "geog")
 
 ROLLBACK;
 COMMIT;
+
+-- neighborhood
+BEGIN;
+COPY neighborhood ("name", "wgs84", "lift")
+	FROM 'neighborhood_v1.csv'
+	DELIMITER ','
+	CSV HEADER;
+
+ROLLBACK;
+COMMIT;
