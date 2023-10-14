@@ -90,3 +90,13 @@ COPY community_district ("borough", "code", "wgs84", "lift")
 	
 ROLLBACK;
 COMMIT;
+
+-- fresh zones
+BEGIN;
+COPY fresh ("class", "wgs84", "lift")
+	FROM 'fresh_v1.csv'
+	DELIMITER ','
+	CSV HEADER
+	
+ROLLBACK;
+COMMIT;
