@@ -80,3 +80,13 @@ COPY neighborhood ("name", "wgs84", "lift")
 
 ROLLBACK;
 COMMIT;
+
+-- community district
+BEGIN;
+COPY community_district ("borough", "code", "wgs84", "lift")
+	FROM 'cd_v1.csv'
+	DELIMITER ','
+	CSV HEADER
+	
+ROLLBACK;
+COMMIT;

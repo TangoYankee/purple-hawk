@@ -2,7 +2,7 @@
 ![planned_erd](db.drawio.svg)
 
 ## Database ERD as implemented
-![implemented_erd](db-erd-export-13Oct2023.png)
+![implemented_erd](db-erd-export.png)
 
 ## notes
 Triggers to calculate areas when something is added/subtracted

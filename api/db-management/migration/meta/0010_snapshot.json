@@ -1,0 +1,599 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "865fbf51-40e2-4940-aaec-9252c26c1cda",
+  "prevId": "8b2ba127-a84b-4f95-91a6-06c03edadd0f",
+  "tables": {
+    "borough": {
+      "name": "borough",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "char(1)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abbr": {
+          "name": "abbr",
+          "type": "char(2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "building_long_island": {
+      "name": "building_long_island",
+      "schema": "",
+      "columns": {
+        "bin": {
+          "name": "bin",
+          "type": "char(7)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geom": {
+          "name": "geom",
+          "type": "geometry(multiPolygon,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "building_long_island_bin_building_id_number_fk": {
+          "name": "building_long_island_bin_building_id_number_fk",
+          "tableFrom": "building_long_island",
+          "tableTo": "building",
+          "columnsFrom": [
+            "bin"
+          ],
+          "columnsTo": [
+            "id_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "building_wgs84": {
+      "name": "building_wgs84",
+      "schema": "",
+      "columns": {
+        "bin": {
+          "name": "bin",
+          "type": "char(7)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geog": {
+          "name": "geog",
+          "type": "geography(multiPolygon, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "building_wgs84_bin_building_id_number_fk": {
+          "name": "building_wgs84_bin_building_id_number_fk",
+          "tableFrom": "building_wgs84",
+          "tableTo": "building",
+          "columnsFrom": [
+            "bin"
+          ],
+          "columnsTo": [
+            "id_number"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "building": {
+      "name": "building",
+      "schema": "",
+      "columns": {
+        "id_number": {
+          "name": "id_number",
+          "type": "char(7)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "construction_year": {
+          "name": "construction_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "roof_height": {
+          "name": "roof_height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ground_elevation": {
+          "name": "ground_elevation",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feat_code": {
+          "name": "feat_code",
+          "type": "char(4)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "community_district": {
+      "name": "community_district",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "borough": {
+          "name": "borough",
+          "type": "char(1)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "char(2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "wgs84": {
+          "name": "wgs84",
+          "type": "geography(multiPolygon, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lift": {
+          "name": "lift",
+          "type": "geometry(multiPolygon,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "community_district_borough_borough_id_fk": {
+          "name": "community_district_borough_borough_id_fk",
+          "tableFrom": "community_district",
+          "tableTo": "borough",
+          "columnsFrom": [
+            "borough"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "neighborhood": {
+      "name": "neighborhood",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wgs84": {
+          "name": "wgs84",
+          "type": "geography(point, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lift": {
+          "name": "lift",
+          "type": "geometry(point,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "project_site_tax_lot": {
+      "name": "project_site_tax_lot",
+      "schema": "",
+      "columns": {
+        "project_site_id": {
+          "name": "project_site_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tax_lot_bbl": {
+          "name": "tax_lot_bbl",
+          "type": "char(10)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "project_site_tax_lot_project_site_id_project_site_id_fk": {
+          "name": "project_site_tax_lot_project_site_id_project_site_id_fk",
+          "tableFrom": "project_site_tax_lot",
+          "tableTo": "project",
+          "columnsFrom": [
+            "project_site_id"
+          ],
+          "columnsTo": [
+            "site_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "project_site_tax_lot_tax_lot_bbl_tax_lot_bbl_fk": {
+          "name": "project_site_tax_lot_tax_lot_bbl_tax_lot_bbl_fk",
+          "tableFrom": "project_site_tax_lot",
+          "tableTo": "tax_lot",
+          "columnsFrom": [
+            "tax_lot_bbl"
+          ],
+          "columnsTo": [
+            "bbl"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "project": {
+      "name": "project",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "area_id": {
+          "name": "area_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "project_user_id_user_id_fk": {
+          "name": "project_user_id_user_id_fk",
+          "tableFrom": "project",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "project_site_id_unique": {
+          "name": "project_site_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "site_id"
+          ]
+        },
+        "project_area_id_unique": {
+          "name": "project_area_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "area_id"
+          ]
+        }
+      }
+    },
+    "tax_lot": {
+      "name": "tax_lot",
+      "schema": "",
+      "columns": {
+        "bbl": {
+          "name": "bbl",
+          "type": "char(10)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "borough_code": {
+          "name": "borough_code",
+          "type": "char(1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block": {
+          "name": "block",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lot": {
+          "name": "lot",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tax_lot_borough_code_borough_id_fk": {
+          "name": "tax_lot_borough_code_borough_id_fk",
+          "tableFrom": "tax_lot",
+          "tableTo": "borough",
+          "columnsFrom": [
+            "borough_code"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "tax_lot_long_island": {
+      "name": "tax_lot_long_island",
+      "schema": "",
+      "columns": {
+        "tax_lot_bbl": {
+          "name": "tax_lot_bbl",
+          "type": "char(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geom": {
+          "name": "geom",
+          "type": "geometry(multiPolygon,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tax_lot_long_island_tax_lot_bbl_tax_lot_bbl_fk": {
+          "name": "tax_lot_long_island_tax_lot_bbl_tax_lot_bbl_fk",
+          "tableFrom": "tax_lot_long_island",
+          "tableTo": "tax_lot",
+          "columnsFrom": [
+            "tax_lot_bbl"
+          ],
+          "columnsTo": [
+            "bbl"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "tax_lot_wgs84": {
+      "name": "tax_lot_wgs84",
+      "schema": "",
+      "columns": {
+        "tax_lot_bbl": {
+          "name": "tax_lot_bbl",
+          "type": "char(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "geog": {
+          "name": "geog",
+          "type": "geography(multiPolygon, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tax_lot_wgs84_tax_lot_bbl_tax_lot_bbl_fk": {
+          "name": "tax_lot_wgs84_tax_lot_bbl_tax_lot_bbl_fk",
+          "tableFrom": "tax_lot_wgs84",
+          "tableTo": "tax_lot",
+          "columnsFrom": [
+            "tax_lot_bbl"
+          ],
+          "columnsTo": [
+            "bbl"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "zoning_district": {
+      "name": "zoning_district",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "zoning_district_long_island": {
+      "name": "zoning_district_long_island",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "geom": {
+          "name": "geom",
+          "type": "geometry(multiPolygon,2263)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "zoning_district_long_island_id_zoning_district_id_fk": {
+          "name": "zoning_district_long_island_id_zoning_district_id_fk",
+          "tableFrom": "zoning_district_long_island",
+          "tableTo": "zoning_district",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "zoning_district_wgs84": {
+      "name": "zoning_district_wgs84",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "geog": {
+          "name": "geog",
+          "type": "geography(multiPolygon, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "zoning_district_wgs84_id_zoning_district_id_fk": {
+          "name": "zoning_district_wgs84_id_zoning_district_id_fk",
+          "tableFrom": "zoning_district_wgs84",
+          "tableTo": "zoning_district",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
