@@ -8,7 +8,7 @@ import { pgClient } from './pg-client';
   await pgClient.connect();
   const db = drizzle(pgClient);
   await migrate(db, { migrationsFolder: './db-management/migration' });
-  console.info('end migrate');
   await pgClient.end();
+  console.info('end migrate');
   exit();
 })();
