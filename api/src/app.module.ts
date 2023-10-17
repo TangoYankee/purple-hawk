@@ -11,6 +11,7 @@ import { CommunityDistrictModule } from './community-district/community-district
 import { FreshModule } from './fresh/fresh.module';
 import { LandUseModule } from './land-use/land-use.module';
 import { LotTypeModule } from './lot-type/lot-type.module';
+import { NeighborhodModule } from './neighborhood/neighborhood.module';
 
 @Global()
 @Module({
@@ -25,6 +26,7 @@ import { LotTypeModule } from './lot-type/lot-type.module';
     FreshModule,
     LandUseModule,
     LotTypeModule,
+    NeighborhodModule,
     ProjectModule,
     TaxLotModule,
   ],
