@@ -13,6 +13,7 @@ import { LandUseModule } from './land-use/land-use.module';
 import { LotTypeModule } from './lot-type/lot-type.module';
 import { NeighborhodModule } from './neighborhood/neighborhood.module';
 import { UserModule } from './user/user.module';
+import { BuildingModule } from './building/building.module';
 
 @Global()
 @Module({
@@ -23,6 +24,7 @@ import { UserModule } from './user/user.module';
     }),
     GlobalModule,
     BoroughModule,
+    BuildingModule,
     CommunityDistrictModule,
     FreshModule,
     LandUseModule,

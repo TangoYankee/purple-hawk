@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm';
 import { pgTable, char, integer, numeric } from 'drizzle-orm/pg-core';
 
 export const building = pgTable('building', {
@@ -7,3 +8,5 @@ export const building = pgTable('building', {
   groundElevation: integer('ground_elevation'),
   featCode: char('feat_code', { length: 4 }),
 });
+
+export type SelectBuilding = InferSelectModel<typeof building>;
