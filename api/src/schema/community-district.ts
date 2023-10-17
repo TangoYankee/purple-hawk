@@ -1,6 +1,7 @@
 import { pgTable, serial, char } from 'drizzle-orm/pg-core';
 import { borough } from './borough';
 import { multiPolygonGeog, multiPolygonGeom } from '../../drizzle-pgis';
+import { InferSelectModel } from 'drizzle-orm';
 
 export const communityDistrict = pgTable('community_district', {
   id: serial('id').primaryKey(),
@@ -11,3 +12,7 @@ export const communityDistrict = pgTable('community_district', {
   wgs84: multiPolygonGeog('wgs84', 4326),
   lift: multiPolygonGeom('lift', 2263),
 });
+
+export type SelectCommunityDistrict = InferSelectModel<
+  typeof communityDistrict
+>;
