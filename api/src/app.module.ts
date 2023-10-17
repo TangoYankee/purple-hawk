@@ -6,6 +6,7 @@ import { DbConfig } from './config';
 import { GlobalModule } from './global/global.module';
 import { ProjectModule } from './project/project.module';
 import { TaxLotModule } from './tax-lot/tax-lot.module';
+import { BoroughModule } from './borough/borough.module';
 
 @Global()
 @Module({
@@ -15,6 +16,7 @@ import { TaxLotModule } from './tax-lot/tax-lot.module';
       load: [DbConfig],
     }),
     GlobalModule,
+    BoroughModule,
     ProjectModule,
     TaxLotModule,
   ],
