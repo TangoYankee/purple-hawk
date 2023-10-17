@@ -1,5 +1,5 @@
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
-import { multiPolygonGeog, multiPolygonGeom } from 'drizzle-pgis';
+import { multiPolygonGeog, multiPolygonGeom } from '../../drizzle-pgis';
 
 export const fresh = pgTable('fresh', {
   id: serial('id').primaryKey(),

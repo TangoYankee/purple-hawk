@@ -7,9 +7,9 @@ import { SelectTaxLot, taxLot } from 'src/schema/tax-lot';
 export class TaxLotService {
   constructor(@Inject(DB) private readonly db: DbType) {}
 
-  // Limit results to 25 to avoid crashing application
+  // Limit results to 2 to avoid crashing application
   async getAll(): Promise<Array<SelectTaxLot>> {
-    const result = await this.db.select().from(taxLot).limit(25);
+    const result = await this.db.select().from(taxLot).limit(2);
     return result;
   }
 

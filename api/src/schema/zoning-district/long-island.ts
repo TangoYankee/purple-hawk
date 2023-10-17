@@ -1,5 +1,5 @@
 import { pgTable, text } from 'drizzle-orm/pg-core';
-import { multiPolygonGeom } from 'drizzle-pgis';
+import { multiPolygonGeom } from '../../../drizzle-pgis';
 import { zoningDistrict } from '.';
 
 export const zoningDistrictLongIsland = pgTable('zoning_district_long_island', {

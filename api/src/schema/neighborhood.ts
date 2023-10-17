@@ -1,5 +1,5 @@
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
-import { pointGeog, pointGeom } from 'drizzle-pgis';
+import { pointGeog, pointGeom } from '../../drizzle-pgis';
 
 export const neighborhood = pgTable('neighborhood', {
   id: serial('id').primaryKey(),

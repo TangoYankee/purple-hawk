@@ -1,6 +1,6 @@
 import { pgTable, serial, char } from 'drizzle-orm/pg-core';
 import { borough } from './borough';
-import { multiPolygonGeog, multiPolygonGeom } from 'drizzle-pgis';
+import { multiPolygonGeog, multiPolygonGeom } from '../../drizzle-pgis';
 
 export const communityDistrict = pgTable('community_district', {
   id: serial('id').primaryKey(),
