@@ -8,6 +8,7 @@ import { ProjectModule } from './project/project.module';
 import { TaxLotModule } from './tax-lot/tax-lot.module';
 import { BoroughModule } from './borough/borough.module';
 import { CommunityDistrictModule } from './community-district/community-district.module';
+import { FreshModule } from './fresh/fresh.module';
 
 @Global()
 @Module({
@@ -19,6 +20,7 @@ import { CommunityDistrictModule } from './community-district/community-district
     GlobalModule,
     BoroughModule,
     CommunityDistrictModule,
+    FreshModule,
     ProjectModule,
     TaxLotModule,
   ],
