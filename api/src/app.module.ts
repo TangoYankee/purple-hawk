@@ -12,6 +12,7 @@ import { FreshModule } from './fresh/fresh.module';
 import { LandUseModule } from './land-use/land-use.module';
 import { LotTypeModule } from './lot-type/lot-type.module';
 import { NeighborhodModule } from './neighborhood/neighborhood.module';
+import { UserModule } from './user/user.module';
 
 @Global()
 @Module({
@@ -29,6 +30,7 @@ import { NeighborhodModule } from './neighborhood/neighborhood.module';
     NeighborhodModule,
     ProjectModule,
     TaxLotModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
