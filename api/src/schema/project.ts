@@ -5,7 +5,9 @@ import { user } from './user';
 export const project = pgTable('project', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name'),
-  userId: uuid('user_id').references(() => user.id),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => user.id),
   siteId: serial('site_id').unique(),
   areaId: serial('area_id').unique(),
 });

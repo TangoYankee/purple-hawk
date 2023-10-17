@@ -28,6 +28,7 @@ export class ProjectController {
   @Post('/')
   async create(@Body() params: InsertProject) {
     return await this.service.create({
+      userId: params.userId,
       name: params.name,
     });
   }
