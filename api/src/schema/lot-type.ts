@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm';
 import { pgTable, char, text } from 'drizzle-orm/pg-core';
 
 export const lotType = pgTable('lot_type', {
@@ -5,3 +6,5 @@ export const lotType = pgTable('lot_type', {
   label: text('label'),
   description: text('description'),
 });
+
+export type SelectLotType = InferSelectModel<typeof lotType>;

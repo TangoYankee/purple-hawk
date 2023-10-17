@@ -10,6 +10,7 @@ import { BoroughModule } from './borough/borough.module';
 import { CommunityDistrictModule } from './community-district/community-district.module';
 import { FreshModule } from './fresh/fresh.module';
 import { LandUseModule } from './land-use/land-use.module';
+import { LotTypeModule } from './lot-type/lot-type.module';
 
 @Global()
 @Module({
@@ -23,6 +24,7 @@ import { LandUseModule } from './land-use/land-use.module';
     CommunityDistrictModule,
     FreshModule,
     LandUseModule,
+    LotTypeModule,
     ProjectModule,
     TaxLotModule,
   ],
