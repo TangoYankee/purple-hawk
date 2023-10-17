@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm';
 import { pgTable, text } from 'drizzle-orm/pg-core';
 
 export const zoningDistrict = pgTable('zoning_district', {
@@ -7,3 +8,5 @@ export const zoningDistrict = pgTable('zoning_district', {
 
 export { zoningDistrictLongIsland } from './long-island';
 export { zoningDistrictWGS84 } from './wgs84';
+
+export type SelectZoningDistrict = InferSelectModel<typeof zoningDistrict>;

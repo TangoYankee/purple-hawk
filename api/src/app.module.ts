@@ -14,6 +14,7 @@ import { LotTypeModule } from './lot-type/lot-type.module';
 import { NeighborhodModule } from './neighborhood/neighborhood.module';
 import { UserModule } from './user/user.module';
 import { BuildingModule } from './building/building.module';
+import { ZoningDistrictModule } from './zoning-district/zoning-district.module';
 
 @Global()
 @Module({
@@ -33,6 +34,7 @@ import { BuildingModule } from './building/building.module';
     ProjectModule,
     TaxLotModule,
     UserModule,
+    ZoningDistrictModule,
   ],
   controllers: [AppController],
   providers: [AppService],
