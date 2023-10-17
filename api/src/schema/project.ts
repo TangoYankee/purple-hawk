@@ -1,5 +1,5 @@
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
-import { pgTable, serial, text, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, text, uuid } from 'drizzle-orm/pg-core';
 import { user } from './user';
 
 export const project = pgTable('project', {
@@ -8,8 +8,6 @@ export const project = pgTable('project', {
   userId: uuid('user_id')
     .notNull()
     .references(() => user.id),
-  siteId: serial('site_id').unique(),
-  areaId: serial('area_id').unique(),
 });
 
 export type SelectProject = InferSelectModel<typeof project>;
