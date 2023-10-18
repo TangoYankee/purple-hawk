@@ -24,6 +24,12 @@
   "homepage": "https://github.com/TangoYankee/purple-hawk/tree/main/api/src/drizzle-pgis#readme.md",
   "dependencies": {
     "@types/geojson": "^7946.0.11",
-    "drizzle-orm": "^0.28.6"
+    "drizzle-orm": "^0.28.6",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.200",
+    "@types/uuid": "^9.0.5"
   }
 }

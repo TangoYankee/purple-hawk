@@ -2,15 +2,18 @@ import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import { ST_AsGeoJSON } from 'drizzle-pgis/spatial-type';
 import { Feature, MultiPolygon } from 'drizzle-pgis/types';
+import { resultAsGeoJSON } from 'drizzle-pgis/utils';
 import { DbType, DB } from 'src/global/providers/db.provider';
 import {
   SelectCommunityDistrict,
   communityDistrict,
 } from 'src/schema/community-district';
 
+export type CommunityDistrictProperties = { borough: string; code: string };
+
 export type CommunityDistrictFeature = Feature<
   MultiPolygon,
-  { borough: string; code: string }
+  CommunityDistrictProperties
 >;
 
 @Injectable()
@@ -36,15 +39,13 @@ export class CommunityDistrictService {
         wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
       })
       .from(communityDistrict);
-    return results.map((result) => ({
-      type: 'Feature',
-      geometry: JSON.parse(result.wgs84) as MultiPolygon,
-      id: result.id,
-      properties: {
-        borough: result.borough,
-        code: result.code,
-      },
-    }));
+    return results.map((result) =>
+      resultAsGeoJSON<
+        MultiPolygon,
+        { borough: string; code: string },
+        { id: number; wgs84: string } & CommunityDistrictProperties
+      >(result, 'wgs84', 'id'),
+    );
   }
 
   async getById(id: number): Promise<Partial<SelectCommunityDistrict>> {
@@ -70,14 +71,10 @@ export class CommunityDistrictService {
       .from(communityDistrict)
       .where(eq(communityDistrict.id, id));
     const result = results[0];
-    return {
-      type: 'Feature',
-      geometry: JSON.parse(result.wgs84),
-      id: result.id,
-      properties: {
-        borough: result.borough,
-        code: result.code,
-      },
-    };
+    return resultAsGeoJSON<
+      MultiPolygon,
+      CommunityDistrictProperties,
+      { id: number; wgs84: string } & CommunityDistrictProperties
+    >(result, 'wgs84', 'id');
   }
 }

@@ -23,3 +23,5 @@ export {
 } from './geography';
 
 export { ST_AsGeoJSON } from './spatial-type';
+
+export { resultAsGeoJSON } from './utils';
