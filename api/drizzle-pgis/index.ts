@@ -21,3 +21,5 @@ export {
   multiPolygonGeog,
   geometryCollectionGeog,
 } from './geography';
+
+export { ST_AsGeoJSON } from './spatial-type';

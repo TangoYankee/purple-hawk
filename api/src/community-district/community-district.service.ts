@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
+import { ST_AsGeoJSON } from 'drizzle-pgis/spatial-type';
 import { Feature, MultiPolygon } from 'drizzle-pgis/types';
 import { DbType, DB } from 'src/global/providers/db.provider';
 import {
   SelectCommunityDistrict,
   communityDistrict,
 } from 'src/schema/community-district';
-import { taxLot } from 'src/schema/tax-lot';
 
 export type CommunityDistrictFeature = Feature<
   MultiPolygon,
@@ -33,7 +33,7 @@ export class CommunityDistrictService {
         id: communityDistrict.id,
         borough: communityDistrict.borough,
         code: communityDistrict.code,
-        wgs84: sql<string>`ST_AsGeoJSON(${taxLot.wgs84}, 6)`,
+        wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
       })
       .from(communityDistrict);
     return results.map((result) => ({
@@ -65,7 +65,7 @@ export class CommunityDistrictService {
         id: communityDistrict.id,
         borough: communityDistrict.borough,
         code: communityDistrict.code,
-        wgs84: sql<string>`ST_AsGeoJSON(${taxLot.wgs84}, 6)`,
+        wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
       })
       .from(communityDistrict)
       .where(eq(communityDistrict.id, id));
