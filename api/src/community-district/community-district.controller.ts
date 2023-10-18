@@ -1,17 +1,22 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CommunityDistrictService } from './community-district.service';
+import { GeoJSONQuery } from 'src/types';
 
 @Controller('community-district')
 export class CommunityDistrictController {
   constructor(private readonly service: CommunityDistrictService) {}
 
   @Get('/')
-  async getAll() {
-    return this.service.getAll();
+  async getAll(@Query() { geojson }: GeoJSONQuery) {
+    return geojson === 'true'
+      ? this.service.getAllGeoJSON()
+      : this.service.getAll();
   }
 
   @Get('/:id')
-  async getById(@Param('id') id: number) {
-    return this.service.getById(id);
+  async getById(@Param('id') id: number, @Query() { geojson }: GeoJSONQuery) {
+    return geojson === 'true'
+      ? this.service.getByIdGeoJSON(id)
+      : this.service.getById(id);
   }
 }
