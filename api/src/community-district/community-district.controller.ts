@@ -1,22 +1,35 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { CommunityDistrictService } from './community-district.service';
-import { GeoJSONQuery } from 'src/types';
+import { Controller, Get, Param } from '@nestjs/common';
+import {
+  CommunityDistrictFeature,
+  CommunityDistrictService,
+} from './community-district.service';
+import { SelectCommunityDistrict } from 'src/schema/community-district';
 
 @Controller('community-district')
 export class CommunityDistrictController {
   constructor(private readonly service: CommunityDistrictService) {}
 
   @Get('/')
-  async getAll(@Query() { geojson }: GeoJSONQuery) {
-    return geojson === 'true'
-      ? this.service.getAllGeoJSON()
-      : this.service.getAll();
+  async getAll(): Promise<Array<Partial<SelectCommunityDistrict>>> {
+    return this.service.getAll();
+  }
+
+  @Get('/geojson')
+  async getAllGeoJSON(): Promise<Array<CommunityDistrictFeature>> {
+    return this.service.getAllGeoJSON();
   }
 
   @Get('/:id')
-  async getById(@Param('id') id: number, @Query() { geojson }: GeoJSONQuery) {
-    return geojson === 'true'
-      ? this.service.getByIdGeoJSON(id)
-      : this.service.getById(id);
+  async getById(
+    @Param('id') id: number,
+  ): Promise<Partial<SelectCommunityDistrict>> {
+    return this.service.getById(id);
+  }
+
+  @Get('/:id/geojson')
+  async getByIdGeoJSON(
+    @Param('id') id: number,
+  ): Promise<CommunityDistrictFeature> {
+    return this.service.getByIdGeoJSON(id);
   }
 }
