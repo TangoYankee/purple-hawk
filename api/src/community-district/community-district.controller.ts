@@ -1,35 +1,52 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { CommunityDistrictService } from './community-district.service';
+import { ApiResponse } from '@nestjs/swagger';
 import {
-  CommunityDistrictFeature,
-  CommunityDistrictService,
-} from './community-district.service';
-import { SelectCommunityDistrict } from 'src/schema/community-district';
+  SelectCommunityDistrictFeatureDto,
+  SelectCommunityDistrictFeatureType,
+  SelectCommunityDistrictFieldDto,
+  SelectCommunityDistrictFieldType,
+} from 'src/schema/community-district';
 
 @Controller('community-district')
 export class CommunityDistrictController {
   constructor(private readonly service: CommunityDistrictService) {}
 
   @Get('/')
-  async getAll(): Promise<Array<Partial<SelectCommunityDistrict>>> {
+  @ApiResponse({
+    description: 'Retrieve non-spatial fields for all community districts',
+    isArray: true,
+    type: SelectCommunityDistrictFeatureDto,
+  })
+  async getAll(): Promise<Array<SelectCommunityDistrictFieldType>> {
     return this.service.getAll();
   }
 
   @Get('/geojson')
-  async getAllGeoJSON(): Promise<Array<CommunityDistrictFeature>> {
+  @ApiResponse({
+    description: 'Retrieve geojson for all community districts',
+    isArray: true,
+    type: SelectCommunityDistrictFeatureDto,
+  })
+  async getAllGeoJSON(): Promise<Array<SelectCommunityDistrictFeatureType>> {
     return this.service.getAllGeoJSON();
   }
 
   @Get('/:id')
-  async getById(
-    @Param('id') id: number,
-  ): Promise<Partial<SelectCommunityDistrict>> {
+  @ApiResponse({
+    description: 'Retrieve non-spatial fields for all community districts',
+    type: SelectCommunityDistrictFieldDto,
+  })
+  async getById(@Param('id') id: number) {
     return this.service.getById(id);
   }
 
   @Get('/:id/geojson')
-  async getByIdGeoJSON(
-    @Param('id') id: number,
-  ): Promise<CommunityDistrictFeature> {
+  @ApiResponse({
+    description: 'Retrieve geojson for all community districts',
+    type: SelectCommunityDistrictFeatureDto,
+  })
+  async getByIdGeoJSON(@Param('id') id: number) {
     return this.service.getByIdGeoJSON(id);
   }
 }
