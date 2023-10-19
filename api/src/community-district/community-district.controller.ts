@@ -3,7 +3,6 @@ import { CommunityDistrictService } from './community-district.service';
 import { ApiResponse } from '@nestjs/swagger';
 import {
   SelectCommunityDistrictFeatureDto,
-  SelectCommunityDistrictFeatureType,
   SelectCommunityDistrictFieldDto,
   SelectCommunityDistrictFieldType,
 } from 'src/schema/community-district';
@@ -22,16 +21,6 @@ export class CommunityDistrictController {
     return this.service.getAll();
   }
 
-  @Get('/geojson')
-  @ApiResponse({
-    description: 'Retrieve geojson for all community districts',
-    isArray: true,
-    type: SelectCommunityDistrictFeatureDto,
-  })
-  async getAllGeoJSON(): Promise<Array<SelectCommunityDistrictFeatureType>> {
-    return this.service.getAllGeoJSON();
-  }
-
   @Get('/:id')
   @ApiResponse({
     description: 'Retrieve non-spatial fields for all community districts',
@@ -39,14 +28,5 @@ export class CommunityDistrictController {
   })
   async getById(@Param('id') id: number) {
     return this.service.getById(id);
-  }
-
-  @Get('/:id/geojson')
-  @ApiResponse({
-    description: 'Retrieve geojson for all community districts',
-    type: SelectCommunityDistrictFeatureDto,
-  })
-  async getByIdGeoJSON(@Param('id') id: number) {
-    return this.service.getByIdGeoJSON(id);
   }
 }
