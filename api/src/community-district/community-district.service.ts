@@ -1,24 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-import { Feature, MultiPolygon } from 'drizzle-pgis/types';
 import { DbType, DB } from 'src/global/providers/db.provider';
 import {
-  SelectCommunityDistrict,
+  CommunityDistrictTraits,
   communityDistrict,
 } from 'src/schema/community-district';
-
-export type CommunityDistrictProperties = { borough: string; code: string };
-
-export type CommunityDistrictFeature = Feature<
-  MultiPolygon,
-  CommunityDistrictProperties
->;
 
 @Injectable()
 export class CommunityDistrictService {
   constructor(@Inject(DB) private readonly db: DbType) {}
 
-  async getAll(): Promise<Array<Partial<SelectCommunityDistrict>>> {
+  async getAll(): Promise<Array<CommunityDistrictTraits>> {
     return await this.db
       .select({
         id: communityDistrict.id,
@@ -28,7 +20,7 @@ export class CommunityDistrictService {
       .from(communityDistrict);
   }
 
-  async getById(id: number): Promise<Partial<SelectCommunityDistrict>> {
+  async getById(id: number): Promise<CommunityDistrictTraits> {
     const result = await this.db
       .select({
         id: communityDistrict.id,

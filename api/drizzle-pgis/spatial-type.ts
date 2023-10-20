@@ -4,8 +4,9 @@ import { sql } from 'drizzle-orm';
 
 /**
  * https://postgis.net/docs/ST_AsGeoJSON.html
+ * @returns a geometry or geography as a GeoJSON "geometry"
  */
-export const ST_AsGeoJSON = (
+export const ST_AsGeoJSON = <G extends Geometry>(
   feature: PgColumn<{
     name: string;
     tableName: string;
@@ -19,4 +20,4 @@ export const ST_AsGeoJSON = (
     baseColumn: never;
   }>,
   maxDecimalDigits = 9,
-) => sql<string>`ST_AsGeoJSON(${feature}, ${maxDecimalDigits})`;
+) => sql<G>`ST_AsGeoJSON(${feature}, ${maxDecimalDigits})`;

@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
 
 export const resultAsGeoJSON = <
-  G extends Geometry,
-  P extends GeoJsonProperties,
   R extends P,
+  P extends GeoJsonProperties,
+  G extends Geometry,
 >(
   result: R,
   featureKey: string,
