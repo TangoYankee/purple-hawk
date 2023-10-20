@@ -6,11 +6,11 @@
 ## Down
 - Would have been handy after already applying a migration to the test database and realizing I actually wanted to make a field not null. 
     - It's technically possible to make another migrate forward to add the requirement. But, it would have been cleaner to undo the migration
-    in the database and then remake the migration script with the desired field.:w
+    in the database and then remake the migration script with the desired field.
 
 ## Making files available in docker
 ```
-sudo cp ../purple-hawk-data/[filename].csv api/db_volume/
+docker cp [DATA_FILE_PATH]/. purple-hawk-geodb-1:var/lib/postgresql/data
 ```
 
 CSV Files:
