@@ -25,4 +25,14 @@ export class GeoJSONController {
   async getByIdGeoJSON(@Param('id') id: number) {
     return this.service.getByIdCommunityDistrict(id);
   }
+
+  @Get('community-district/:id/tax-lot')
+  @ApiTags('community district', 'tax lot')
+  @ApiResponse({
+    description:
+      'Retrieve the tax lot geojson within a specified community district',
+  })
+  async getByCommunityDistrictIdTaxLot(@Param('id') id: number) {
+    return this.service.getByCommunityDistrictIdTaxLot(id);
+  }
 }
