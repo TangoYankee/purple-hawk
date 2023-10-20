@@ -12,15 +12,28 @@ import { taxLot } from 'src/schema/tax-lot';
 export class GeoJSONService {
   constructor(@Inject(DB) private readonly db: DbType) {}
 
-  async getAllCommunityDistrict() {
-    const results = await this.db
-      .select({
-        id: communityDistrict.id,
-        borough: communityDistrict.borough,
-        code: communityDistrict.code,
-        wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
-      })
-      .from(communityDistrict);
+  async getAllCommunityDistrict(code: string) {
+    let results: any[];
+    if (code) {
+      results = await this.db
+        .select({
+          id: communityDistrict.id,
+          borough: communityDistrict.borough,
+          code: communityDistrict.code,
+          wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
+        })
+        .from(communityDistrict)
+        .where(eq(communityDistrict.code, code));
+    } else {
+      results = await this.db
+        .select({
+          id: communityDistrict.id,
+          borough: communityDistrict.borough,
+          code: communityDistrict.code,
+          wgs84: ST_AsGeoJSON(communityDistrict.wgs84, 6),
+        })
+        .from(communityDistrict);
+    }
     return results.map((result) =>
       resultAsGeoJSON<
         MultiPolygon,

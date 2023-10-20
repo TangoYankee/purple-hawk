@@ -2,9 +2,10 @@ const apiBasePath = 'http://localhost:3000';
 
 /* Uncomment the test path of interest */
 
-// const testPath = 'community-district'
+const testPath = 'community-district'
 // const testPath = 'community-district/10'
-const testPath = 'community-district/10/tax-lot'
+// const testPath = 'community-district?code=10'
+// const testPath = 'community-district/10/tax-lot'
 
 window.addEventListener('DOMContentLoaded', async () => {
     const map = L.map('map').setView([40.74, -74.0], 11);

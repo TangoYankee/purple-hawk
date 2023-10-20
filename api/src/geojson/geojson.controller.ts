@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GeoJSONService } from './geojson.service';
 
@@ -13,8 +13,8 @@ export class GeoJSONController {
     description: 'Retrieve geojson for all community districts',
     isArray: true,
   })
-  async getAll() {
-    return this.service.getAllCommunityDistrict();
+  async getAll(@Query() { code }: { code?: string }) {
+    return this.service.getAllCommunityDistrict(code);
   }
 
   @Get('community-district/:id')
