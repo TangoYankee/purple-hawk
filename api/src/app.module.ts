@@ -15,6 +15,7 @@ import { NeighborhodModule } from './neighborhood/neighborhood.module';
 import { UserModule } from './user/user.module';
 import { BuildingModule } from './building/building.module';
 import { ZoningDistrictModule } from './zoning-district/zoning-district.module';
+import { GeoJSONModule } from './geojson/geojson.module';
 
 @Global()
 @Module({
@@ -23,6 +24,7 @@ import { ZoningDistrictModule } from './zoning-district/zoning-district.module';
       isGlobal: true,
       load: [DbConfig],
     }),
+    GeoJSONModule,
     GlobalModule,
     BoroughModule,
     BuildingModule,

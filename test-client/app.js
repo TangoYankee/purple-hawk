@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    const response = await fetch(`${apiBasePath}/${testPath}/geojson`);
+    const response = await fetch(`${apiBasePath}/geojson/${testPath}`);
     const spatial = await response.json();
     L.geoJSON(spatial).addTo(map);
 })
