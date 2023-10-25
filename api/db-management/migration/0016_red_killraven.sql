@@ -1,0 +1,1 @@
+ALTER TABLE "project_tax_lot" ALTER COLUMN "study_extent" SET NOT NULL;

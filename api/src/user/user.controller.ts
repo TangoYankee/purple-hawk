@@ -16,6 +16,11 @@ export class UserController {
     return this.service.getById(id);
   }
 
+  @Get('/:id/project')
+  async getByIdProject(@Param('id') id: string) {
+    return this.service.getByIdProject({ userId: id });
+  }
+
   @Post('/')
   async create(@Body() params: InsertUser) {
     return await this.service.create({

@@ -37,7 +37,8 @@ export class TaxLotService {
         facilityFAR: taxLot.facilityFAR,
       })
       .from(taxLot)
-      .limit(2);
+      .limit(2)
+      .offset(10000);
     return result;
   }
 
