@@ -92,7 +92,12 @@ export class GeoJSONController {
   }
 
   @Get('facility/:facilityId')
-  async getByIdFacility(@Param('facilityId') facilityId: string) {
-    return this.service.getByIdFacility(facilityId);
+  async getByIdFacility(
+    @Param('facilityId') facilityId: string,
+    @Query() query: { bufferFt?: string },
+  ) {
+    const { bufferFt: bufferRaw } = query;
+    const bufferFt = isNaN(parseInt(bufferRaw)) ? null : parseInt(bufferRaw);
+    return this.service.getByIdFacility(facilityId, bufferFt);
   }
 }

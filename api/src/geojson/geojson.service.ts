@@ -189,26 +189,59 @@ export class GeoJSONService {
     return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
   }
 
-  async getByIdFacility(uid: string) {
-    const results = await this.db
-      .select({
-        uid: facility.uid,
-        name: facility.name,
-        type: facility.type,
-        bin: facility.bin,
-        bbl: facility.bbl,
-        addressBuildingCode: facility.addressBuildingCode,
-        addressStreetName: facility.addressStreetName,
-        capacity: facility.capacity,
-        capacityType: facility.capacityType,
-        serviceArea: facility.facilityServiceArea,
-        operatingEntity: facility.operatingEntity,
-        oversightAgency: facility.oversightAgency,
-        wgs84: ST_AsGeoJSON(facility.wgs84, 6),
-      })
-      .from(facility)
-      .where(eq(facility.uid, uid));
+  async getByIdFacility(uid: string, bufferFt: number | null) {
+    if (bufferFt) {
+      const facilityBuffer = this.db
+        .select({
+          lift: sql`ST_BUFFER(${facility.lift}, ${bufferFt})`.as('buffer_lift'),
+        })
+        .from(facility)
+        .where(eq(facility.uid, uid))
+        .as('facility_buffer');
 
-    return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
+      const results = await this.db
+        .select({
+          uid: facility.uid,
+          name: facility.name,
+          type: facility.type,
+          bin: facility.bin,
+          bbl: facility.bbl,
+          addressBuildingCode: facility.addressBuildingCode,
+          addressStreetName: facility.addressStreetName,
+          capacity: facility.capacity,
+          capacityType: facility.capacityType,
+          serviceArea: facility.facilityServiceArea,
+          operatingEntity: facility.operatingEntity,
+          oversightAgency: facility.oversightAgency,
+          wgs84: ST_AsGeoJSON(facility.wgs84, 6),
+        })
+        .from(facilityBuffer)
+        .leftJoin(
+          facility,
+          sql`ST_WITHIN(${facility.lift}, ${facilityBuffer.lift})`,
+        );
+      return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
+    } else {
+      const results = await this.db
+        .select({
+          uid: facility.uid,
+          name: facility.name,
+          type: facility.type,
+          bin: facility.bin,
+          bbl: facility.bbl,
+          addressBuildingCode: facility.addressBuildingCode,
+          addressStreetName: facility.addressStreetName,
+          capacity: facility.capacity,
+          capacityType: facility.capacityType,
+          serviceArea: facility.facilityServiceArea,
+          operatingEntity: facility.operatingEntity,
+          oversightAgency: facility.oversightAgency,
+          wgs84: ST_AsGeoJSON(facility.wgs84, 6),
+        })
+        .from(facility)
+        .where(eq(facility.uid, uid));
+
+      return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
+    }
   }
 }
