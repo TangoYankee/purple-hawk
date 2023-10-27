@@ -85,4 +85,14 @@ export class GeoJSONController {
       bufferFt,
     });
   }
+
+  @Get('facility')
+  async getAllFacility() {
+    return this.service.getAllFacility();
+  }
+
+  @Get('facility/:facilityId')
+  async getByIdFacility(@Param('facilityId') facilityId: string) {
+    return this.service.getByIdFacility(facilityId);
+  }
 }

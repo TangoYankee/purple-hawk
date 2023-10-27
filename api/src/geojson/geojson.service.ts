@@ -11,6 +11,7 @@ import {
   CommunityDistrictTraitsGeog,
   communityDistrict,
 } from 'src/schema/community-district';
+import { facility } from 'src/schema/facility';
 import { landUse } from 'src/schema/land-use';
 import { Extent, projectToTaxLot } from 'src/schema/project-tax-lot';
 import { taxLot } from 'src/schema/tax-lot';
@@ -162,5 +163,52 @@ export class GeoJSONService {
       .leftJoin(borough, eq(communityDistrict.borough, borough.id));
 
     return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'id'));
+  }
+
+  // Limit to 1000 to prevent crashing
+  async getAllFacility() {
+    const results = await this.db
+      .select({
+        uid: facility.uid,
+        name: facility.name,
+        type: facility.type,
+        bin: facility.bin,
+        bbl: facility.bbl,
+        addressBuildingCode: facility.addressBuildingCode,
+        addressStreetName: facility.addressStreetName,
+        capacity: facility.capacity,
+        capacityType: facility.capacityType,
+        serviceArea: facility.facilityServiceArea,
+        operatingEntity: facility.operatingEntity,
+        oversightAgency: facility.oversightAgency,
+        wgs84: ST_AsGeoJSON(facility.wgs84, 6),
+      })
+      .from(facility)
+      .limit(1000);
+
+    return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
+  }
+
+  async getByIdFacility(uid: string) {
+    const results = await this.db
+      .select({
+        uid: facility.uid,
+        name: facility.name,
+        type: facility.type,
+        bin: facility.bin,
+        bbl: facility.bbl,
+        addressBuildingCode: facility.addressBuildingCode,
+        addressStreetName: facility.addressStreetName,
+        capacity: facility.capacity,
+        capacityType: facility.capacityType,
+        serviceArea: facility.facilityServiceArea,
+        operatingEntity: facility.operatingEntity,
+        oversightAgency: facility.oversightAgency,
+        wgs84: ST_AsGeoJSON(facility.wgs84, 6),
+      })
+      .from(facility)
+      .where(eq(facility.uid, uid));
+
+    return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
   }
 }
