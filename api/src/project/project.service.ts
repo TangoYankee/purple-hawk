@@ -146,7 +146,7 @@ export class ProjectService {
         .from(extentBufferQuery)
         .leftJoin(
           taxLot,
-          sql<MultiPolygon>`ST_WITHIN(${taxLot.lift}, ${extentBufferQuery.bufferLift})`,
+          sql<MultiPolygon>`ST_Intersects(${taxLot.lift}, ${extentBufferQuery.bufferLift})`,
         )
         .leftJoin(borough, eq(taxLot.boroughCode, borough.id))
         .leftJoin(landUse, eq(taxLot.landUseCode, landUse.code));

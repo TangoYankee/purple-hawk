@@ -101,7 +101,7 @@ export class GeoJSONService {
         .from(extentBufferQuery)
         .leftJoin(
           taxLot,
-          sql<MultiPolygon>`ST_WITHIN(${taxLot.lift}, ${extentBufferQuery.bufferLift})`,
+          sql<MultiPolygon>`ST_Intersects(${taxLot.lift}, ${extentBufferQuery.bufferLift})`,
         )
         .leftJoin(borough, eq(taxLot.boroughCode, borough.id))
         .leftJoin(landUse, eq(taxLot.landUseCode, landUse.code));
@@ -218,7 +218,7 @@ export class GeoJSONService {
         .from(facilityBuffer)
         .leftJoin(
           facility,
-          sql`ST_WITHIN(${facility.lift}, ${facilityBuffer.lift})`,
+          sql`ST_Intersects(${facility.lift}, ${facilityBuffer.lift})`,
         );
       return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
     } else {
