@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
+import { alias } from 'drizzle-orm/pg-core';
 import { ST_AsGeoJSON } from 'drizzle-pgis/spatial-type';
 import { MultiPolygon } from 'drizzle-pgis/types';
 import { resultAsGeoJSON } from 'drizzle-pgis/utils';
@@ -191,14 +192,7 @@ export class GeoJSONService {
 
   async getByIdFacility(uid: string, bufferFt: number | null) {
     if (bufferFt) {
-      const facilityBuffer = this.db
-        .select({
-          lift: sql`ST_BUFFER(${facility.lift}, ${bufferFt})`.as('buffer_lift'),
-        })
-        .from(facility)
-        .where(eq(facility.uid, uid))
-        .as('facility_buffer');
-
+      const facilitySelf = alias(facility, 'facilitySelf');
       const results = await this.db
         .select({
           uid: facility.uid,
@@ -215,11 +209,12 @@ export class GeoJSONService {
           oversightAgency: facility.oversightAgency,
           wgs84: ST_AsGeoJSON(facility.wgs84, 6),
         })
-        .from(facilityBuffer)
+        .from(facility)
         .leftJoin(
-          facility,
-          sql`ST_Intersects(${facility.lift}, ${facilityBuffer.lift})`,
-        );
+          facilitySelf,
+          sql`ST_DWithin(${facility.lift}, ${facilitySelf.lift}, ${bufferFt})`,
+        )
+        .where(eq(facilitySelf.uid, uid));
       return results.map((result) => resultAsGeoJSON(result, 'wgs84', 'uid'));
     } else {
       const results = await this.db
