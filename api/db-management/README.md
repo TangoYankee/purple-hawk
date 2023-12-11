@@ -1,23 +1,12 @@
-## Issues
-- Custom types have quotes around them
-- Adding constraints done out of necessary order
-- Trying to automatically cast from text to integer
-
-## Down
-- Would have been handy after already applying a migration to the test database and realizing I actually wanted to make a field not null. 
-    - It's technically possible to make another migrate forward to add the requirement. But, it would have been cleaner to undo the migration
-    in the database and then remake the migration script with the desired field.
+## Running the migrations in the api container
+```
+docker compose exec -it api npm run migrate
+```
 
 ## Making files available in docker
 ```
-docker cp [DATA_FILE_PATH]/. purple-hawk-geodb-1:var/lib/postgresql/data
+docker compose cp [DATA_FILE_PATH]/. geodb:var/lib/postgresql/data
 ```
 
-CSV Files:
- - borough
- - pluto_23v2_essentials_short_v2
- - pluto_23v2_2263_short
- - pluto_23v2_4326_short
- - building_essentials_short_v1
- - building_long_island_short_v1
- - building_wgs84_short_v1
+## Loading the csv files into the database tables
+Run the sql loading commands from the ['load.sql'](load.sql) file. Omit the "Rollback" commands; they are intended as a safety stop-gap that should be skipped unless needed.
