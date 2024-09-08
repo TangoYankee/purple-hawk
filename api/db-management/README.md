@@ -1,6 +1,6 @@
-## Running the migrations in the api container
+## Running the migrations 
 ```
-docker compose exec -it api npm run migrate
+npm run migrate
 ```
 
 ## Making files available in docker

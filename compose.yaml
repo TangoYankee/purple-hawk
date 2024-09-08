@@ -8,15 +8,3 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./api/db_volume:/var/lib/postgresql/data
-  api:
-    build: ./api
-    ports:
-      - 3000:3000
-    volumes:
-      - ./api:/usr/src/app
-    environment:
-      DB_HOST: geodb
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: password
-      DB_NAME: postgres
