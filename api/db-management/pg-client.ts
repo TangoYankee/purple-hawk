@@ -1,4 +1,5 @@
 import { Client } from 'pg';
+import 'dotenv/config';
 
 export const pgClient = new Client({
   host: process.env.DB_HOST,
